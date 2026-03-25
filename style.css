@@ -2,3 +2,101 @@
     text-decoration: line-through;
     color: gray;
 }
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Poppins:wght@300;400&display=swap');
+
+body {
+    background-color: #ECE3D2; /* Light Beige from your color code */
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    padding-top: 50px;
+    color: #4A6644; /* Dark Matcha for text */
+}
+
+.container {
+    background: #FCEBF1; /* Very Pale Pink */
+    width: 420px;
+    padding: 30px;
+    border: 5px solid #9FAA74; /* Matcha Green border */
+    border-radius: 20px;
+    box-shadow: 8px 8px 0px #D7DAB3; /* Light Matcha shadow */
+}
+
+h1 {
+    font-family: 'Playfair Display', serif;
+    color: #C66F80; /* Strawberry Pink */
+    text-align: center;
+    font-style: italic;
+    font-size: 2.3rem;
+    margin-bottom: 20px;
+}
+
+#task-input {
+    width: 65%;
+    padding: 12px;
+    border: 2px solid #D7DAB3;
+    border-radius: 10px;
+    outline: none;
+    font-family: 'Poppins', sans-serif;
+}
+
+#task-input:focus {
+    border-color: #C66F80; /* Turns pink when you type */
+}
+
+#add-btn {
+    background-color: #4A6644; /* Dark Matcha */
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+#add-btn:hover {
+    background-color: #C66F80; /* Hovers to Strawberry Pink */
+    transform: scale(1.05);
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 25px;
+}
+
+li {
+    background: white;
+    margin-bottom: 12px;
+    padding: 15px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-left: 6px solid #F4C7D0; /* Cute Strawberry accent */
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+}
+
+.completed {
+    text-decoration: line-through;
+    color: #D7DAB3;
+    font-style: italic;
+}
+
+/* Cute remove button */
+li button {
+    background: #F4C7D0;
+    border: none;
+    color: #C66F80;
+    border-radius: 8px;
+    padding: 5px 10px;
+    font-size: 0.7rem;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+li button:hover {
+    background: #C66F80;
+    color: white;
+}
