@@ -31,4 +31,6 @@ I learned how to use `document.getElementById` to select elements and how to use
 A major challenge was preventing the "Toggle" function from firing when the "Remove" button was clicked. I solved this by using `e.stopPropagation()` in the delete button's event handler to stop the click event from bubbling up to the list item.
 
 ## Screenshots
-!![To-Do List Matcha Strawberry Preview](matcha-strawberry-preview.jpg)
+![To-Do List Matcha Strawberry Preview](image.png)
+## Live Demo
+[View Matcha Strawberry Dump Live](https://maune-tut.github.io/iyf-s10-week-05-maune-tut/)
