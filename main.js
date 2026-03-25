@@ -1,51 +1,42 @@
-// Task 9.1: Selecting Elements from the DOM
-const mainHeader = document.getElementById('main-header');
+// 1. Select the elements (Task 9.1)
 const taskInput = document.getElementById('task-input');
 const addBtn = document.getElementById('add-btn');
 const todoList = document.getElementById('todo-list');
 
-// Log them to the console to verify they are connected
-console.log("Header:", mainHeader);
-console.log("Input Box:", taskInput);
-console.log("Add Button:", addBtn);
-// Task 9.2: Adding an Event Listener and Function
-function addTask() {
-    // 1. Get the text from the input box
-    const taskText = taskInput.value;
-
-    // 2. Create a new <li> element
-    const newLi = document.createElement('li');
-    newLi.textContent = taskText;
-
-    // 3. Add the new <li> to our <ul> list
-    todoList.appendChild(newLi);
-
-    // 4. Clear the input box so it's ready for the next task
-    taskInput.value = "";
-}
-
-// Attach the function to the button click
-addBtn.addEventListener('click', addTask);
+// 2. The function to add a task (Task 9.2)
 function addTask() {
     const taskText = taskInput.value;
 
     if (taskText.trim() !== "") {
+        // Create the <li> element
         const newLi = document.createElement('li');
         newLi.textContent = taskText;
 
-        // --- NEW CODE: Create a Delete Button ---
+        // --- TASK 10.3: Toggle "completed" when clicked ---
+        newLi.onclick = function() {
+            newLi.classList.toggle('completed');
+        };
+
+        // --- TASK 10.2: Create and Add Delete Button ---
         const deleteBtn = document.createElement('button');
         deleteBtn.textContent = "Remove";
-        deleteBtn.style.marginLeft = "10px";
+        deleteBtn.style.marginLeft = "15px";
 
-        // Add the logic to delete the task when clicked
-        deleteBtn.onclick = function() {
+        deleteBtn.onclick = function(e) {
+            e.stopPropagation(); // Stops the "toggle" from triggering
             newLi.remove();
         };
-        // ----------------------------------------
 
-        newLi.appendChild(deleteBtn); // Put the button inside the list item
+        // 3. Put everything together
+        newLi.appendChild(deleteBtn);
         todoList.appendChild(newLi);
+
+        // 4. Clear the input box
         taskInput.value = "";
+    } else {
+        alert("Please enter a task!");
     }
 }
+
+// 5. Connect the button to the function
+addBtn.addEventListener('click', addTask);
