@@ -1,8 +1,8 @@
-# Week 5: DOM Manipulation Project
+# Week 5: DOM Manipulation 
 
 ## Author
-- **Name:** [Your Full Name]
-- **GitHub:** [@MaisoriKitayama](https://github.com/MaisoriKitayama)
+- **Name:** Nyamal Maune 
+- **GitHub:** [@maune-tut](https://github.com/maune-tut/iyf-s10-week-05-maune-tut)
 - **Date:** March 25, 2026
 
 ## Project Description
@@ -31,4 +31,4 @@ I learned how to use `document.getElementById` to select elements and how to use
 A major challenge was preventing the "Toggle" function from firing when the "Remove" button was clicked. I solved this by using `e.stopPropagation()` in the delete button's event handler to stop the click event from bubbling up to the list item.
 
 ## Screenshots
-![To-Do List Preview](image_b3b9d0.jpg)
+!![To-Do List Matcha Strawberry Preview](matcha-strawberry-preview.jpg)
