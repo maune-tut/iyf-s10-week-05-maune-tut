@@ -26,3 +26,26 @@ function addTask() {
 
 // Attach the function to the button click
 addBtn.addEventListener('click', addTask);
+function addTask() {
+    const taskText = taskInput.value;
+
+    if (taskText.trim() !== "") {
+        const newLi = document.createElement('li');
+        newLi.textContent = taskText;
+
+        // --- NEW CODE: Create a Delete Button ---
+        const deleteBtn = document.createElement('button');
+        deleteBtn.textContent = "Remove";
+        deleteBtn.style.marginLeft = "10px";
+
+        // Add the logic to delete the task when clicked
+        deleteBtn.onclick = function() {
+            newLi.remove();
+        };
+        // ----------------------------------------
+
+        newLi.appendChild(deleteBtn); // Put the button inside the list item
+        todoList.appendChild(newLi);
+        taskInput.value = "";
+    }
+}
