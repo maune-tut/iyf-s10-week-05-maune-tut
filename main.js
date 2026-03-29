@@ -1,22 +1,34 @@
-// 1. Select the elements
 const taskInput = document.getElementById('task-input');
 const addBtn = document.getElementById('add-btn');
 const todoList = document.getElementById('todo-list');
 
-// --- WEEK 7: STATE ---
+// --- WEEK 7: STATE (Now using Objects) ---
 let tasks = JSON.parse(localStorage.getItem('myTasks')) || [];
 
 function saveToStorage() {
     localStorage.setItem('myTasks', JSON.stringify(tasks));
 }
 
-// 2. The function to add a task to the UI
-function renderTask(taskText) {
+// Function to render a single task object
+function renderTask(taskObj) {
     const newLi = document.createElement('li');
-    newLi.textContent = taskText;
+    
+    // Feature: Add the Date and Text
+    newLi.innerHTML = `
+        <span class="task-text">${taskObj.text}</span>
+        <small style="color: gray; margin-left: 10px;">(${taskObj.date})</small>
+    `;
 
+    // Feature: Keep "Completed" status after refresh
+    if (taskObj.completed) {
+        newLi.classList.add('completed');
+    }
+
+    // Toggle Completed Status
     newLi.onclick = function() {
+        taskObj.completed = !taskObj.completed; // Flip the true/false
         newLi.classList.toggle('completed');
+        saveToStorage(); // Save the new status!
     };
 
     const deleteBtn = document.createElement('button');
@@ -26,8 +38,8 @@ function renderTask(taskText) {
     deleteBtn.onclick = function(e) {
         e.stopPropagation();
         newLi.remove();
-        // WEEK 7: Remove from memory
-        tasks = tasks.filter(t => t !== taskText);
+        // Remove from memory using the unique ID
+        tasks = tasks.filter(t => t.id !== taskObj.id);
         saveToStorage();
     };
 
@@ -35,16 +47,22 @@ function renderTask(taskText) {
     todoList.appendChild(newLi);
 }
 
-// --- WEEK 7: LOAD SAVED ITEMS ---
+// Initial Load
 tasks.forEach(task => renderTask(task));
 
-// 3. Adding new tasks
 function addTask() {
     const taskText = taskInput.value.trim();
     if (taskText !== "") {
-        renderTask(taskText);
-        // WEEK 7: Save to memory
-        tasks.push(taskText);
+        // Create a Task Object
+        const newTask = {
+            text: taskText,
+            id: Date.now(), // Unique ID based on time
+            completed: false,
+            date: new Date().toLocaleDateString() // Current Date
+        };
+
+        tasks.push(newTask);
+        renderTask(newTask);
         saveToStorage();
         taskInput.value = "";
     } else {
