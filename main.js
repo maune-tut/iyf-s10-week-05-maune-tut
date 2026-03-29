@@ -71,3 +71,8 @@ function addTask() {
 }
 
 addBtn.addEventListener('click', addTask);
+function updateStats() {
+    const statsDisplay = document.getElementById('task-stats');
+    const remaining = tasks.filter(t => !t.completed).length;
+    statsDisplay.textContent = `Remaining tasks: ${remaining}`;
+}
