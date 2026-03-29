@@ -100,3 +100,8 @@ li button:hover {
     background: #C66F80;
     color: white;
 }
+.completed {
+    text-decoration: line-through;
+    opacity: 0.6; /* Makes it look 60% faded */
+    color: #888;  /* Changes text to a lighter gray */
+}
