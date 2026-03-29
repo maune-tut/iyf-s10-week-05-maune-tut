@@ -1,42 +1,55 @@
-// 1. Select the elements (Task 9.1)
+// 1. Select the elements
 const taskInput = document.getElementById('task-input');
 const addBtn = document.getElementById('add-btn');
 const todoList = document.getElementById('todo-list');
 
-// 2. The function to add a task (Task 9.2)
+// --- WEEK 7: STATE ---
+let tasks = JSON.parse(localStorage.getItem('myTasks')) || [];
+
+function saveToStorage() {
+    localStorage.setItem('myTasks', JSON.stringify(tasks));
+}
+
+// 2. The function to add a task to the UI
+function renderTask(taskText) {
+    const newLi = document.createElement('li');
+    newLi.textContent = taskText;
+
+    newLi.onclick = function() {
+        newLi.classList.toggle('completed');
+    };
+
+    const deleteBtn = document.createElement('button');
+    deleteBtn.textContent = "Remove";
+    deleteBtn.style.marginLeft = "15px";
+
+    deleteBtn.onclick = function(e) {
+        e.stopPropagation();
+        newLi.remove();
+        // WEEK 7: Remove from memory
+        tasks = tasks.filter(t => t !== taskText);
+        saveToStorage();
+    };
+
+    newLi.appendChild(deleteBtn);
+    todoList.appendChild(newLi);
+}
+
+// --- WEEK 7: LOAD SAVED ITEMS ---
+tasks.forEach(task => renderTask(task));
+
+// 3. Adding new tasks
 function addTask() {
-    const taskText = taskInput.value;
-
-    if (taskText.trim() !== "") {
-        // Create the <li> element
-        const newLi = document.createElement('li');
-        newLi.textContent = taskText;
-
-        // --- TASK 10.3: Toggle "completed" when clicked ---
-        newLi.onclick = function() {
-            newLi.classList.toggle('completed');
-        };
-
-        // --- TASK 10.2: Create and Add Delete Button ---
-        const deleteBtn = document.createElement('button');
-        deleteBtn.textContent = "Remove";
-        deleteBtn.style.marginLeft = "15px";
-
-        deleteBtn.onclick = function(e) {
-            e.stopPropagation(); // Stops the "toggle" from triggering
-            newLi.remove();
-        };
-
-        // 3. Put everything together
-        newLi.appendChild(deleteBtn);
-        todoList.appendChild(newLi);
-
-        // 4. Clear the input box
+    const taskText = taskInput.value.trim();
+    if (taskText !== "") {
+        renderTask(taskText);
+        // WEEK 7: Save to memory
+        tasks.push(taskText);
+        saveToStorage();
         taskInput.value = "";
     } else {
         alert("Please enter a task!");
     }
 }
 
-// 5. Connect the button to the function
 addBtn.addEventListener('click', addTask);
